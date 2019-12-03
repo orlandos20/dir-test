@@ -2,14 +2,11 @@
     "name": "dir-test",
     "version": "0.1.0",
     "private": true,
-    "dependencies": {
-        "express": "4.17.1"
-    },
+    "dependencies": {},
     "scripts": {
-      "start": "node ./server/server.js"
+        "start": "node ./server/server.js"
     },
     "devDependencies": {
-        "express": "4.17.1"
+        "express": "^4.17.1"
     }
-  }
-  
+}

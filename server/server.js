@@ -1,4 +1,5 @@
 const express = require("express");
+const quotation = require("./quotation");
 
 const app = express();
 
@@ -7,8 +8,14 @@ app.get('/', (req, res, next)=>{
     next();
 });
 
-app.get('/cotizacion', (req, res) =>{
+app.get('/cotizacion', (req, res, next) =>{
     res.send("Estas en /cotizacion");
+    next();
+});
+
+app.use('/cotizacion/dolar', (req, res, next)=>{
+    console.log("req", req);
+    res.send(quotation);
 });
 
 
