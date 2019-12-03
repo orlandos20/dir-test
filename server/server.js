@@ -2,11 +2,12 @@ const express = require("express");
 
 const app = express();
 
-app.get('/', (req, res)=>{
+app.get('/', (req, res, next)=>{
     res.send("Hola Mundo!");
+    next();
 });
 
-app.get('/cotizacion', (err, req, res) =>{
+app.get('/cotizacion', (req, res) =>{
     res.send("Estas en /cotizacion");
 });
 
