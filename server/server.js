@@ -13,9 +13,9 @@ app.get('/cotizacion', (req, res, next) =>{
     next();
 });
 
-app.use('/cotizacion/dolar', (req, res, next)=>{
-    console.log("req", req);
-    res.send(quotation);
+app.use('/cotizacion/:currency', async (req, res, next)=>{
+    res.send(await quotation.request(req.params.currency));
+    next();
 });
 
 
