@@ -1,5 +1,7 @@
 const express = require("express");
 const quotation = require("./quotation");
+// const currencyTypes = require("./currencyTypes");
+
 
 const app = express();
 
@@ -8,8 +10,8 @@ app.get('/', (req, res, next)=>{
     next();
 });
 
-app.get('/cotizacion', (req, res, next) =>{
-    res.send("Estas en /cotizacion");
+app.all('/cotizacion', async (req, res, next) =>{
+    res.send( await quotation.list())
     next();
 });
 
