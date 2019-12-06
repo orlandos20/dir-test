@@ -1,9 +1,10 @@
 const express = require("express");
+const cors = require('cors');
 const quotation = require("./quotation");
-// const currencyTypes = require("./currencyTypes");
-
 
 const app = express();
+
+app.all( cors() );
 
 app.get('/', (req, res, next)=>{
     res.send("Hola Mundo!");
@@ -11,7 +12,7 @@ app.get('/', (req, res, next)=>{
 });
 
 app.all('/cotizacion', async (req, res, next) =>{
-    res.send( await quotation.list())
+    cors(), res.send( await quotation.list())
     next();
 });
 
@@ -20,5 +21,8 @@ app.use('/cotizacion/:currency', async (req, res, next)=>{
     next();
 });
 
+app.set('port', process.env.PORT || 5000);
 
-app.listen(5000, ()=> console.log("App corriendo en puerto 5000!"));
+const server = app.listen(app.get('port'), function() {
+    console.log('listening');
+});
