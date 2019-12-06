@@ -20,12 +20,13 @@ const Main = ()=>{
         if(results) resp = results;
 
         let pintar = resp.map(item=>{
-            // return <li>{item.Name}</li>;
+            return <li>{item.Name}</li>;
         })
 
     return(
         <div>
-            <div>{pintar}</div>
+            <div>
+                {pintar}</div>
         </div>
     )
 }
