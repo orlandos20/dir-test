@@ -22,18 +22,24 @@ import {
 
 function App(){ 
     
-    let currencyList;
+    let [currencyList, setCurrencyList] = useState([]);
+
+    let dataInLocalStorage;
 
     useEffect(()=>{
-        currencyList = getCurrencyList("http://localhost:5000/cotizacion")
-        .then(response => { 
-            store.dispatch({
-                type: "CURRENCY_LIST",
-                results: response
+        if(!dataInLocalStorage){
+            getCurrencyList("http://localhost:5000/cotizacion")
+            .then(response => response)
+            .then(data =>{
+            localStorage.setItem("currencyList", JSON.stringify(data))
+            dataInLocalStorage = JSON.parse(localStorage.getItem("currencyList"))
+            setCurrencyList(currencyList = dataInLocalStorage)
             })
-        })
-        
-    }, [])
+            .catch(error => console.log("error ", error));
+        }   
+    }, [currencyList])
+
+    dataInLocalStorage = JSON.parse(localStorage.getItem("currencyList"));
 
     return(
         <Router>
@@ -41,11 +47,16 @@ function App(){
             <h1>Hola mundo desde React</h1>
             <Switch>
                 <Route exact path="/">
-                <Home></Home>
+                    {
+                        dataInLocalStorage &&  <Home currencyList={dataInLocalStorage}></Home>
+                    }
                 </Route>
 
                 <Route exact path="/cotizacion">
-                    <QuotationView></QuotationView>
+                    {
+                        dataInLocalStorage &&  <QuotationView currencyList={dataInLocalStorage}></QuotationView>
+                    }
+                   
                 </Route>
 
                 <Route path="/cotizacion/:currency"

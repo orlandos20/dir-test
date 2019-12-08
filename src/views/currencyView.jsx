@@ -16,40 +16,44 @@ import {
 
 const CurrencyView = (props)=>{
     let location = useLocation();
-
+    console.log("location in currencyView ", location)
     let [currencyData, setCurrencyData] = useState({});
+    let currencyDataLoaded = false;
 
     useEffect(()=>{
-        if(Object.keys(currencyData).length === 0){
+        if(!currencyDataLoaded){
             getCurrencyData(props.currency).then(data => data)
-                .then(result => setCurrencyData( currencyData = result) );
+                .then(result => setCurrencyData( currencyData = result))
+                    .then(data => currencyDataLoaded = true )
+                    .catch(error => console.log("error in CurrencyView ", error));
+        }else{
+            currencyDataLoaded = false;        
         }
-    }, [props.currency])
+    }, [currencyDataLoaded])
 
     return(
 
-    //     <div style={{backgroundColor: "blue" }}>
-    //     <TransitionGroup>
-    //       <CSSTransition
-    //         key={location.key}
-    //         classNames="fade"
-    //         timeout={300}
-    //       >
-    //           <Switch location={location}>
-    //               <Route exact path="/cotizacion/:currency">
-    //                 <Currency currencyData={currencyData}></Currency>
-    //               </Route>
+        <div style={{backgroundColor: "blue" }}>
+        <TransitionGroup>
+          <CSSTransition
+            key={location.key}
+            classNames="fade"
+            timeout={300}
+          >
+              <Switch location={location}>
+                  <Route exact path={`${location.pathname}`}>
+                    <Currency currencyData={currencyData}></Currency>
+                  </Route>
+              </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      </div>
 
-    //           </Switch>
-    //       </CSSTransition>
-    //     </TransitionGroup>
-    //   </div>
 
-
-        <React.Fragment>
-            <h3>currency</h3>
-                <Currency currencyData={currencyData}></Currency>
-        </React.Fragment>
+        // <React.Fragment>
+        //     <h3>currency</h3>
+        //         <Currency currencyData={currencyData}></Currency>
+        // </React.Fragment>
     )
 
 }

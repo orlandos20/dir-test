@@ -13,27 +13,28 @@ import {
   } from "react-transition-group";
 
 
-const QuotationView = ()=>{
-    // let location = useLocation();
+const QuotationView = (props)=>{
+    let location = useLocation();
+    console.log("location in QuotationView", location);
     return(
 
-    //     <div style={{backgroundColor: "red" }}>
-    //     <TransitionGroup>
-    //       <CSSTransition
-    //         key={location.key}
-    //         classNames="fade"
-    //         timeout={300}
-    //       >
-    //           <Switch location={location}>
-    //               <Route exact path="/cotizacion/">
-    //               <Quotation></Quotation>
-    //               </Route>
-    //           </Switch>
-    //       </CSSTransition>
-    //     </TransitionGroup>
-    //   </div>
+        <div style={{backgroundColor: "red" }}>
+        <TransitionGroup>
+          <CSSTransition
+            key={location.key}
+            classNames="fade"
+            timeout={1000}
+          >
+              <Switch location={location}>
+                  <Route exact path={`${location.pathname}`}>
+                  <Quotation currencyList={props.currencyList}></Quotation>
+                  </Route>
+              </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      </div>
 
-        <Quotation></Quotation>
+        // <Quotation currencyList={props.currencyList}></Quotation>
     )
 
 }

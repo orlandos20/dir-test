@@ -14,19 +14,23 @@ import {
     CSSTransition
   } from "react-transition-group";
 
-
-
-const QuotationList = ()=>{
-    // let location = useLocation()
+const QuotationList = (props)=>{
+    let location = useLocation()
 
     let [results, setResults] = useState([]);
+    let dataLoaded = false;
 
-    store.subscribe(()=>{
-       setResults(results = store.getState().results)
-    })
+    useEffect(()=>{
+        if(props.currencyList){
+            setResults(results = props.currencyList)
+            dataLoaded = true;
+        }else{
+            dataLoaded = false;
+        }
+    }, [dataLoaded])
 
     let paint = results.map(item=>{
-        return <QuotationItem itemData={item}></QuotationItem>;
+        return <QuotationItem key={item.Code} itemData={item}></QuotationItem>;
     })
 
     return(
