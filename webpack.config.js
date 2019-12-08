@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: ["@babel/polyfill", './src/index.js'],
@@ -36,7 +36,7 @@ module.exports = {
     },
     output: {
       filename: 'bundle.js',
-      path: __dirname + '/dist',
+      path: path.resolve(__dirname, 'dist'),
       publicPath: '/'
     },
     resolve: {
@@ -44,7 +44,7 @@ module.exports = {
     },
     devServer: {
       contentBase: path.join(__dirname, './public'),
-      publicPath: 'http://localhost:8080/dist',
+      publicPath: 'http://localhost:8080/',
       port: 8080,
       historyApiFallback: true,
       open: true,
@@ -54,9 +54,10 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
-        new HtmlWebpackPlugin({
-          template: 'public/index.html',
-          // favicon: 'public/favicon.ico'
-        }),
+        // new HtmlWebpackPlugin({
+        //   hash: true,
+        //   template: './public/index.html',
+        //   // favicon: 'public/favicon.ico'
+        // }),
       ]
 };

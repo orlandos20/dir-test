@@ -1,7 +1,9 @@
 const axios = require("axios");
 
 let list = ()=>{
-        return axios.get("http://demo4456880.mockable.io/currency-symbols")
+    let urlMockable = "http://demo4456880.mockable.io/currency-symbols"
+    let urlAmok = "http://www.amock.io/api/orlandos20/currency.list"
+        return axios.get(urlAmok)
         .then(response => { return response.data.data.List.Currency})
         .catch(error => {console.log("Error retrieving the currencyTypes", error)})
 }

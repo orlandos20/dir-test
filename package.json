@@ -3,7 +3,11 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@babel/polyfill": "^7.7.0"
+        "@babel/polyfill": "^7.7.0",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "react-router-dom": "^5.1.2",
+        "react-transition-group": "^4.3.0"
     },
     "scripts": {
         "back_start": "node ./server/server.js",
@@ -23,9 +27,9 @@
         "html-webpack-plugin": "^3.2.0",
         "less": "^3.10.3",
         "less-loader": "^5.0.0",
-        "react": "^16.12.0",
-        "react-dom": "^16.12.0",
         "react-hot-loader": "^4.12.18",
+        "react-redux": "^7.1.3",
+        "redux": "^4.0.4",
         "style-loader": "^1.0.1",
         "webpack": "^4.41.2",
         "webpack-cli": "^3.3.10",
