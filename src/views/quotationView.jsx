@@ -1,42 +1,52 @@
 import React from 'react';
+import {useState, useEffect} from 'react';
 import Quotation from './../components/quotation'   
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useLocation,
-    Link
-  } from "react-router-dom";
-import {
-    TransitionGroup,
-    CSSTransition
-  } from "react-transition-group";
+import Paper from '@material-ui/core/Paper';
+import Slide from '@material-ui/core/Slide';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    height: 180,
+  },
+  wrapper: {
+    width: "100%",
+  },
+  paper: {
+    zIndex: 1,
+    position: 'relative',
+    margin: theme.spacing(1),
+  },
+  svg: {
+    width: 100,
+    height: 100,
+  },
+  polygon: {
+    fill: theme.palette.common.white,
+    stroke: theme.palette.divider,
+    strokeWidth: 1,
+  },
+}));
 
 const QuotationView = (props)=>{
-    let location = useLocation();
-    console.log("location in QuotationView", location);
-    return(
+    const classes = useStyles();
+    const [checked, setChecked] = useState(false);
 
-        <div style={{backgroundColor: "red" }}>
-        <TransitionGroup>
-          <CSSTransition
-            key={location.key}
-            classNames="fade"
-            timeout={1000}
-          >
-              <Switch location={location}>
-                  <Route exact path={`${location.pathname}`}>
-                  <Quotation currencyList={props.currencyList}></Quotation>
-                  </Route>
-              </Switch>
-          </CSSTransition>
-        </TransitionGroup>
+    useEffect(()=>{
+      setChecked(prev => !prev);
+    }, [props.currencyList])
+
+    return (
+      <div className={classes.root}>
+        <div className={classes.wrapper}>
+          <Slide direction="left" in={checked} mountOnEnter unmountOnExit>
+            <Paper elevation={4} className={classes.paper}>
+                <Quotation currencyList={props.currencyList}></Quotation>
+            </Paper>
+          </Slide>
+        </div>
       </div>
-
-        // <Quotation currencyList={props.currencyList}></Quotation>
-    )
-
+    );
 }
 
 export default QuotationView;

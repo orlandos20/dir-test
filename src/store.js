@@ -7,9 +7,14 @@ const reducer = (state, action) => {
             results: state.results.concat(dataInLocalStorage)
         }
     }
+    if(action.type === "CURRENCY_DATA_LOADED"){
+        return{
+            CurrencyData: state.CurrencyData.concat(action.CurrencyData)
+        }
+    }
 
     return state;
 }
 
 
-export default createStore(reducer, {results: [] });
+export default createStore(reducer, {results: [], CurrencyData: [] });
