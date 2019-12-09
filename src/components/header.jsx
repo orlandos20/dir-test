@@ -10,6 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import store from '../store';
+import { Redirect } from 'react-router-dom'
 
 
 const useStylesLoader = makeStyles(theme => ({
@@ -91,6 +92,15 @@ export default function SearchAppBar() {
 
   let currencyInfo;
 
+  const handleSearch = (e) =>{
+    e.preventDefault();
+    if(e.keyCode == 13){
+      let redirectTo = "/cotizacion/"+e.target.value;
+      console.log("redirecTo ", redirectTo);
+      <Redirect to={`${redirectTo}`} />
+    }
+  }
+
   useEffect(()=>{
     store.subscribe(()=>{
       currencyInfo = store.getState().CurrencyData;
@@ -128,6 +138,7 @@ export default function SearchAppBar() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onKeyUp={handleSearch}
             />
           </div>
         </Toolbar>
