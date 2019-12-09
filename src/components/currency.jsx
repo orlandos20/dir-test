@@ -3,24 +3,12 @@ import { useState, useEffect } from 'react';
 import { useRouteMatch, NavLink, useLocation } from 'react-router-dom';
 import store from '../store';
 import { makeStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
-
-const LoaderUseStyles = makeStyles(theme => ({
-    root: {
-      width: '100%',
-      marginTop: "64px",
-      '& > * + *': {
-        marginTop: theme.spacing(2),
-      },
-    },
-  }));
 
   const useStyles = makeStyles(theme => ({
     '@global': {
@@ -69,16 +57,6 @@ const LoaderUseStyles = makeStyles(theme => ({
     },
   }));
   
-  function LinearIndeterminate() {
-    const LoaderClasses = LoaderUseStyles();
-  
-    return (
-      <div className={LoaderClasses.root}>
-        <LinearProgress color="secondary" />
-      </div>
-    );
-  }
-
 const Currency = (props)=>{
   const classes = useStyles();
   let { path, url } = useRouteMatch();
@@ -102,9 +80,6 @@ const Currency = (props)=>{
 
     return(
       <React.Fragment>
-        {
-          !currency && <LinearIndeterminate />
-        }
         <Card>
             <CardHeader
               title={paramToShow}
@@ -135,18 +110,6 @@ const Currency = (props)=>{
                 </CardActions>
         </Card>
       </React.Fragment>
-       
-      
-
-
-        // <div style={{marginTop: "64px"}}>
-        //      {
-        //         !currency && <LinearIndeterminate />
-        //     }
-        //     <span>{currency} </span>
-        //     <span> {price}</span>
-          // <Link to="/cotizacion">volver atrás</Link>
-          // </div>
     )
 }
 
