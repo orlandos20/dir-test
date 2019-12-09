@@ -6,7 +6,6 @@ import Pricing from '../components/pricing';
 const Home = (props)=>{
     let location = useLocation();
     let { path, url } = useRouteMatch();
-    console.log("location in home ", location);
 
     const tiers = props.currencyList;
 
@@ -49,7 +48,9 @@ const Home = (props)=>{
                    <Route exact path={`${location.pathname/"cotizacion"}`}>
                        <QuotationView currencyList={props.currencyList}></QuotationView>
                     </Route>
-            <Link to={`${url+"cotizacion"}`}><span>Ir a Cotizacion</span></Link>
+                    <div style={{width: '100%', display: 'flex', justifyContent: 'center', marginTop: '20px', marginBottom: '20px'}}>
+                        <Link to={`${url+"cotizacion"}`}><span>See all currencies</span></Link>
+                    </div>
         </React.Fragment>
     )
 

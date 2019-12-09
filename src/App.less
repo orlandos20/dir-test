@@ -10,14 +10,13 @@ body{
     padding-right: 16px;
     }
 
-    ul{
-        a{
-            text-decoration: none;
+    a{
+        text-decoration: none !important;
+        color: unset;
+        &:active, &:focus, &:hover{
+            text-decoration: none !important;
             color: unset;
-            &:active, &:focus, &:hover{
-                text-decoration: none;
-                color: unset;
-            }
+            cursor: pointer;
         }
     }
    
@@ -25,4 +24,11 @@ body{
 
 .makeStyles-cardPricing-132{
     margin-bottom: 5px !important;
+}
+
+.MuiPaper-elevation1{
+    &:hover{
+        transition: all 0.4s ease-out;
+        transform: scale(1.1);
+    }
 }

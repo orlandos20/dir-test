@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useRouteMatch, NavLink } from 'react-router-dom';
+import { useRouteMatch, NavLink, Link } from 'react-router-dom';
 import { getCurrencyData } from '../utils/requests';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -10,7 +10,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
@@ -36,19 +35,6 @@ const LoaderUseStyles = makeStyles(theme => ({
       </div>
     );
   }
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -97,25 +83,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const footers = [
-  {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
-  },
-  {
-    title: 'Features',
-    description: ['Cool stuff', 'Random feature', 'Team feature', 'Developer stuff', 'Another one'],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-  },
-  {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
-  },
-];
-
 export default function Pricing(props) {
   const classes = useStyles();
   let { path, url } = useRouteMatch();
@@ -145,14 +112,20 @@ export default function Pricing(props) {
         }
 
     useEffect(()=>{
+
         if( !currencyDataLoaded ){
             currencyDataLoaded = true;
             req(tiers);
-            console.log("dataLoaded dentro del if ", dataLoaded);
         }else{
             setChecked(prev => !prev);
-            currencyDataLoaded = false;        
+            currencyDataLoaded = false; 
         }
+
+        const refresh = setInterval(()=>{
+          req(tiers);
+        }, 5000);
+        
+        return () => clearInterval(refresh);
         
     }, [])
   
@@ -177,6 +150,7 @@ export default function Pricing(props) {
           {dataLoaded && tiers.map(tier => (
             // Enterprise card is full width at sm breakpoint
             <Grid item key={tier.code} xs={12} md={4}>
+              <Link to={`${"cotizacion/"+tier.name}`}>
               <Card>
                 <CardHeader
                   title={tier.name}
@@ -205,42 +179,28 @@ export default function Pricing(props) {
                     ))}
                   </ul> */}
                 </CardContent>
-                <CardActions>
+                {/* <CardActions>
                 <NavLink to={`${"/cotizacion/"+tier.name}`}>
                     <Button fullWidth variant={tier.buttonVariant} color="primary">
                         "See Quotation"
                     </Button>
                 </NavLink>
-                </CardActions>
+                </CardActions> */}
               </Card>
+              </Link>
             </Grid>
           ))}
         </Grid>
       </Container>
       {/* Footer */}
-      <Container maxWidth="md" component="footer" className={classes.footer}>
+      {/* <Container maxWidth="md" component="footer" className={classes.footer}>
         <Grid container spacing={4} justify="space-evenly">
-          {footers.map(footer => (
-            <Grid item xs={6} sm={3} key={footer.title}>
-              <Typography variant="h6" color="textPrimary" gutterBottom>
-                {footer.title}
-              </Typography>
-              <ul>
-                {footer.description.map(item => (
-                  <li key={item}>
-                    <Link href="#" variant="subtitle1" color="textSecondary">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </Grid>
-          ))}
+          
         </Grid>
         <Box mt={5}>
           <Copyright />
         </Box>
-      </Container>
+      </Container> */}
       {/* End footer */}
     </React.Fragment>
   );

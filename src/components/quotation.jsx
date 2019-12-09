@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import QuotationItem from './quotationItem';
+import Button from '@material-ui/core/Button';
+import { useRouteMatch, NavLink, useLocation } from 'react-router-dom';
 
 const QuotationList = (props)=>{
 
@@ -23,6 +25,11 @@ const QuotationList = (props)=>{
     return(
         <React.Fragment>
             <ul>
+            <NavLink to={`${"/"}`}>
+                <Button  color="primary">
+                        Go back
+                </Button>
+            </NavLink>
                 {paint}
             </ul>
         </React.Fragment>

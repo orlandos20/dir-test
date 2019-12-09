@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import Quotation from './../components/quotation'   
+import { useRouteMatch, NavLink, useLocation } from 'react-router-dom';
+import Quotation from './../components/quotation'  
 import Paper from '@material-ui/core/Paper';
 import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
@@ -41,7 +42,7 @@ const QuotationView = (props)=>{
         <div className={classes.wrapper}>
           <Slide direction="left" in={checked} mountOnEnter unmountOnExit>
             <Paper elevation={4} className={classes.paper}>
-                <Quotation currencyList={props.currencyList}></Quotation>
+              <Quotation currencyList={props.currencyList}></Quotation>
             </Paper>
           </Slide>
         </div>

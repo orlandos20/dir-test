@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useRouteMatch, NavLink, useLocation } from 'react-router-dom';
 import Currency from '../components/currency';
 import { getCurrencyData } from '../utils/requests';
 import Paper from '@material-ui/core/Paper';
@@ -8,10 +9,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    marginTop: "60px",
     height: 180,
+    width: "100%",
+    display: "flex",
+    justifyContent: "center"
   },
   wrapper: {
-    width: "100%",
+    width: "90%"
   },
   paper: {
     zIndex: 1,

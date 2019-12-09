@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useRouteMatch, NavLink, useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import store from '../store';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -129,7 +128,7 @@ const Currency = (props)=>{
             </CardContent>
             <CardActions>
                 <NavLink to={`${"/cotizacion"}`}>
-                    <Button fullWidth  color="primary">
+                    <Button fullWidth color="primary">
                         Go back
                     </Button>
                 </NavLink>
