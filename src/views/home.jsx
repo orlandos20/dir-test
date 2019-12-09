@@ -34,9 +34,9 @@ const Home = (props)=>{
         let aux = ()=>{
             tiersSorted.forEach(tier =>{
                 reordered.push({
-                    "name": tier.value[0].toLowerCase(),
-                    "code": tier.value[1].toLowerCase(),
-                    "Symbol": tier.value[2].toLowerCase(),
+                    "name": tier.value[0] ? tier.value[0].toLowerCase() : "",
+                    "code": tier.value[1] ? tier.value[1].toLowerCase() : "",
+                    "Symbol": tier.value[2] ? tier.value[2].toLowerCase() : "",
                 })
             })
         } 

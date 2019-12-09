@@ -19,7 +19,6 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 const LoaderUseStyles = makeStyles(theme => ({
     root: {
       width: '100%',
-      marginTop: "64px",
       '& > * + *': {
         marginTop: theme.spacing(2),
       },

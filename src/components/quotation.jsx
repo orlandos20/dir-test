@@ -24,7 +24,7 @@ const QuotationList = (props)=>{
 
     return(
         <React.Fragment>
-            <ul style={{marginTop: "80px"}}>
+            <ul style={{marginTop: "15px"}}>
             <NavLink to={`${"/"}`}>
                 <Button  color="primary">
                         Go back
