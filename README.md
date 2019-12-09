@@ -32,8 +32,5 @@ https://github.com/orlandos20
 # Currently in develpment.
 ```
 
-## Thanks
-
-```
+## Thanks 
 To [Dirmod](https://www.dirmod.com/es/inicio/) for the opportunity.
-```
