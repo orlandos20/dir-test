@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-let list = ()=>{
+let list = (url)=>{
     let urlMockable = "http://demo4456880.mockable.io/currency-symbols"
     let urlAmok = "http://www.amock.io/api/orlandos20/currency.list"
         return axios.get(urlAmok)

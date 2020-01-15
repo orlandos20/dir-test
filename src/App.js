@@ -13,9 +13,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import store from './store';
 
-
-
-
 function App(){ 
     
     let [currencyList, setCurrencyList] = useState([]);
@@ -27,7 +24,11 @@ function App(){
             .then(response => response)
             .then(data =>{
             localStorage.setItem("currencyList", JSON.stringify(data))
-            dataInLocalStorage = JSON.parse(localStorage.getItem("currencyList"))
+            dataInLocalStorage = JSON.parse(localStorage.getItem("currencyList"));
+            store.dispatch({
+                type: "CURRENCY_LIST",
+                results: dataInLocalStorage
+            })
             setCurrencyList(currencyList = dataInLocalStorage)
             })
             .catch(error => console.log("error ", error));
@@ -53,7 +54,7 @@ function App(){
 
                         <Route exact path="/cotizacion">
                             {
-                                dataInLocalStorage &&  <QuotationView currencyList={dataInLocalStorage}></QuotationView>
+                                dataInLocalStorage &&  console.log("store in app.js ", store.getState()) && <QuotationView currencyList={dataInLocalStorage}></QuotationView>
                             } 
                         </Route>
 
